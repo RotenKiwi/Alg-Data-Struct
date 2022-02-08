@@ -3,4 +3,4 @@ Generate a shortest path tree with the given source as the root. Maintain 2 sets
 
 Step1: create a set sptSet, that keeps the track of vertices included in the shortest path set. Initially this set is empty.
 Step2: assign distance value to all vertices in the input graph. initialise all the distances as infinity. assign distance value as zero for the source vertex, so that it is picked first.
-Step3: pick a vertex 'u' from the other set with the lowest distance value and which is not in the sptSet and include it in sptSet. Update distance value of all the vertices adjacent to 'u'.*/ 
+Step3: pick a vertex 'u' from the other set with the lowest distance value and which is not in the sptSet and include it in sptSet. Update distance value of all the vertices adjacent to 'u'. To update the distance values, iterate through all adjacent vertices. For every adjacent vertex v, if the sum of distance value of u (from source) and weight of edge u-v, is less than the distance value of v, then update the distance value of v*/ 
