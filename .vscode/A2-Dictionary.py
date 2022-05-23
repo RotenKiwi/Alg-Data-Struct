@@ -3,7 +3,7 @@ b,totl = 0,0
 bucket = {}
 
 
-def create():
+def create():           #function to create a table
     global b
     b = int(input("Enter the table size : "))
     for i in range(b):
@@ -11,14 +11,14 @@ def create():
         bucket[i] = -1
 
 
-def printtable():
+def printtable():       #function to print table
     global b
     for i in range(b):
         print(table[i],end="|")
     print("")
 
 
-def chaininsert(key):
+def chaininsert(key):       #function to insert into table
     global b,totl
     hash = key%b
     if (table[hash][0]==None):
@@ -31,7 +31,7 @@ def chaininsert(key):
             if (table[hash][0]==None):
                 totl += 1
                 flag = 1
-                if bucket[key%b]!=1:
+                if bucket[key%b]!= -1:
                     table[bucket[key%b]][1] = hash
                 bucket[key%b] = hash
                 table[hash][0] = key
@@ -40,7 +40,7 @@ def chaininsert(key):
             print("Key : ",key," not inserted - table full .")
 
 
-def chainreplace(key):
+def chainreplace(key):          #function to insert into table with replacement
     global b,totl
     hash = key%b
     if (table[hash][0]==None):
@@ -55,7 +55,7 @@ def chainreplace(key):
             chaininsert(x)
 
 
-def chainsearch(key):
+def chainsearch(key):           #function to search in the table
     global b
     hash = key%b
     if (table[hash][0]==key):
@@ -81,7 +81,7 @@ def chainsearch(key):
             print("Key : ",key," not found.")
 
 
-def chaindelete(key):
+def chaindelete(key):           #function to delete from the table
     global b
     hash = key%b
     if (table[hash][0]==key):
