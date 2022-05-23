@@ -1,14 +1,14 @@
-table, tableq={},{}
-totl, totq=0,0
+table, tableq={},{} #initialised tables for linear and quadratic probing
+totl, totq=0,0      #size of the tables
 
 def create(b):
-    for i in range(b):
+    for i in range(b):      #fill both tables with null value
         table[i]= -1
         tableq[i]= -1
 
-def linsert(key,b):
+def linsert(key,b):     #insert function for linear probing
     global totl
-    hash=key%b
+    hash=key%b          #hash function
     flag=0
     if table[hash]== -1:
         table[hash]=key
@@ -23,9 +23,9 @@ def linsert(key,b):
     if flag==0:
         print("Table Full or Key not Probed")
 
-def qinsert(key,b):
+def qinsert(key,b):     #insert function for quadratic probiing
     global totq
-    hash=key%b
+    hash=key%b          #hash function
     flag=0
     if tableq[hash]==-1:
         tableq[hash]=key
@@ -40,7 +40,8 @@ def qinsert(key,b):
         if flag == 0:
             print("Table Full or Key not probed.")
 
-def lsearch(key,b):
+
+def lsearch(key,b):     #search function for linear probing
     hash=key%b
     flag=0
     if table[hash]==-1:
@@ -59,7 +60,9 @@ def lsearch(key,b):
         if flag==0:
             print(key, "is not present.")
 
-def qsearch(key,b):
+
+
+def qsearch(key,b):         #search function for linear probing
     hash=key%b
     flag=0
     if tableq[hash]== -1:
@@ -78,7 +81,8 @@ def qsearch(key,b):
         if flag==0:
             print(key, "is not present.")
 
-def printtable(b):
+
+def printtable(b):          #function for printing the tables
     print("\n linearly probed: ")
     for i in range(b):
         print(table[i], end="|")
