@@ -1,0 +1,195 @@
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+struct node{
+char key[20],mean[20];
+node *left,*right;};
+
+
+class dict{
+public:
+node *root=NULL;
+void create();
+void insert(node *temp,node *root);
+void display(node *n);
+node* del(node *n,char key[]);
+node* min(node *n);
+int update(node *n,char key[]);
+int search(node *n,char key[]);};
+
+
+void dict::create(){
+node *temp;
+temp=new node;
+cout<<"Enter the keyword: ";
+cin>>temp->key;
+cout<<"Enter the meaning: ";
+cin>>temp->mean;
+temp->left=NULL;
+temp->right=NULL;
+if(root==NULL)
+root=temp;
+else
+insert(temp,root);}
+
+
+void dict::insert(node *temp,node *root){
+if(strcmp(temp->key,root->key) < 0){
+if(root->left==NULL)
+root->left=temp;
+else
+insert(temp,root->left);}
+else{
+if(root->right==NULL)
+root->right=temp;
+else
+insert(temp,root->right);}}
+
+
+void dict::display(node *n){
+if(n==NULL)
+return;
+else{
+display(n->left);
+cout<<n->key<<": "<<n->mean<<endl;
+display(n->right);}}
+
+
+node* dict::del(node *n,char key[20]){
+node *temp;
+if(n==NULL){
+cout<<"Word "<<key<<" not found!"<<endl;
+return n;}
+if(strcmp(key,n->key) < 0){
+n->left=del(n->left,key);
+return n;}
+if(strcmp(key,n->key) > 0){
+n->right=del(n->right,key);
+return n;}
+if(n->right==NULL && n->left==NULL){
+temp=n;
+delete temp;
+cout<<key<<" successfully deleted!"<<endl;
+return NULL;}
+if(n->right==NULL){
+temp=n;
+n=n->left;
+delete temp;
+cout<<key<<" successfully deleted!"<<endl;
+return n;}
+else if(n->left==NULL){
+temp=n;
+n=n->right;
+delete temp;
+cout<<key<<" successfully deleted!"<<endl;
+return n;}
+temp=min(n->right);
+strcpy(n->key,temp->key);
+strcpy(n->mean,temp->mean);
+n->right=del(n->right,temp->key);
+cout<<key<<" successfully deleted!"<<endl;
+return n;}
+
+
+node* dict::min(node *n){
+while(n->left!=NULL)
+{n=n->left;}
+return n;}
+
+
+int dict::update(node *n,char key[20]){
+while(n!=NULL){
+if(strcmp(key,n->key) == 0){
+cout<<"Enter the new meaning for "<<key<<": ";
+cin>>n->mean;
+return 1;}
+if(strcmp(key,n->key) < 0)
+n=n->left;
+if(strcmp(key,n->key) > 0)
+n=n->right;}
+return -1;}
+
+
+int dict::search(node *n,char key[]){
+int count=0;
+while(n!=NULL){
+count++;
+if(strcmp(key,n->key) == 0){
+cout<<"No. of comparisons to search "<<key<<" are: "<<count<<endl;
+return 1;}
+if(strcmp(key,n->key) < 0)
+n=n->left;
+if(strcmp(key,n->key) > 0)
+n=n->right;}
+return -1;}
+
+
+void menu(){
+cout<<"***Menu***"<<endl;
+cout<<"1. Add a new word"<<endl;
+cout<<"2. Display the dictionary"<<endl;
+cout<<"3. Delete a word"<<endl;
+cout<<"4. Update a word"<<endl;
+cout<<"5. Search a word"<<endl;
+cout<<"6. Exit"<<endl;}
+
+
+int main(){
+int ch;
+dict d;
+menu();
+do{
+cout<<"\nEnter your choice: ";
+cin>>ch;
+switch(ch){
+case 1:
+d.create();
+break;
+case 2:
+if(d.root==NULL)
+cout<<"Dictionary is empty!"<<endl;
+else{
+cout<<"*DICTIONARY*"<<endl;
+d.display(d.root);}
+break;
+case 3:
+if(d.root==NULL)
+cout<<"Dictionary is empty!"<<endl;
+else{
+char delkey[20];
+cout<<"Enter the keyword to be deleted: ";
+cin>>delkey;
+d.root=d.del(d.root,delkey);}
+break;
+case 4:
+if(d.root==NULL)
+cout<<"Dictionary is empty!"<<endl;
+else{
+char updkey[20];
+cout<<"Enter the keyword to be updated: ";
+cin>>updkey;
+if(d.update(d.root,updkey) == 1)
+cout<<"Meaning updated for "<<updkey<<"!"<<endl;
+else
+cout<<"Word "<<updkey<<" not found!"<<endl;}
+break;
+case 5:
+if(d.root==NULL)
+cout<<"Dictionary is empty!"<<endl;
+else{
+char searchkey[20];
+cout<<"Enter the keyword to be updated: ";
+cin>>searchkey;
+if(d.search(d.root,searchkey) == 1)
+cout<<"Word "<<searchkey<<" found!"<<endl;
+else
+cout<<"Word "<<searchkey<<" not found!"<<endl;}
+break;
+case 6:
+cout<<"Program exited! Thank you!"<<endl;
+break;
+default:
+cout<<"Invalid choice! Please make a valid choice!"<<endl;
+break;}}while(ch!=6);
+return 0;}
