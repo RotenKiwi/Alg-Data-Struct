@@ -1,10 +1,12 @@
 table, tableq={},{} #initialised tables for linear and quadratic probing
 totl, totq=0,0      #size of the tables
 
+
 def create(b):
     for i in range(b):      #fill both tables with null value
         table[i]= -1
         tableq[i]= -1
+
 
 def linsert(key,b):     #insert function for linear probing
     global totl
@@ -22,6 +24,7 @@ def linsert(key,b):     #insert function for linear probing
                 break
     if flag==0:
         print("Table Full or Key not Probed")
+
 
 def qinsert(key,b):     #insert function for quadratic probiing
     global totq
@@ -61,7 +64,6 @@ def lsearch(key,b):     #search function for linear probing
             print(key, "is not present.")
 
 
-
 def qsearch(key,b):         #search function for linear probing
     hash=key%b
     flag=0
@@ -90,6 +92,7 @@ def printtable(b):          #function for printing the tables
     for i in range(b):
         print(tableq[i], end="|")
     print(" ")
+    
 
 b=int(input("Enter table size"))
 create(b)
@@ -143,4 +146,3 @@ while(1):
     elif ch==3:
         print("exit")
         break
-

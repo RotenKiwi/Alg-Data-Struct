@@ -23,18 +23,17 @@ void swapper();
 // void swap(node* n);
 void swpre(node* n);
 void swin(node* n);
-void swpost(node* n);
-};
-node *tree::create()
-{
+void swpost(node* n);};
+
+node *tree::create(){
 int val;
 node *temp=new(struct node);
 cin>>val;
 temp->data=val;
 temp->left=NULL;
 temp->right=NULL;
-return temp;
-}
+return temp;}
+
 void tree::insert()
 {
 cout<<"Enter the data of the node: ";
