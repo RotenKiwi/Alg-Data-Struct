@@ -17,3 +17,9 @@ After Gaurd-Clause:
     throw new NullArgumentException(nameof(password));
   // Do something...}```
  
+What is Gaurd-Clause?
+A guard clause is a technique derived from the fail-fast method whose purpose is to validate a condition and immediately stop the code execution if the condition is not met by throwing a meaningful error instead of leaving the program to throw a deeper and less meaningful error.
+
+Why Gaurd Clause?
+Guard clauses simplify code by removing useless nested branching conditions, by returning meaningful errors.
+
